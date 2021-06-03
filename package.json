@@ -1,0 +1,49 @@
+{
+  "name": "vite-plugin-import2",
+  "version": "1.0.0",
+  "description": "A tool look like babel-plugin-import and can auto inject to vite's Pre-bundling dependencies.",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "author": "caixue <caixue233@gmail.com>",
+  "types": "esm/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "cjs",
+    "esm"
+  ],
+  "scripts": {
+    "build": "tsc && tsc --outDir ./cjs --module commonjs"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.1",
+    "@types/babel__generator": "^7.6.2",
+    "@types/babel__traverse": "^7.11.0",
+    "typescript": "^4.3.2",
+    "vite": "^2.3.6"
+  },
+  "dependencies": {
+    "@babel/generator": "^7.12.11",
+    "@babel/helper-module-imports": "^7.12.5",
+    "@babel/parser": "^7.12.11",
+    "@babel/traverse": "^7.12.12",
+    "@babel/types": "^7.12.12",
+    "change-case": "^4.1.2",
+    "vite-plugin-auto-include": "^1.0.1"
+  },
+  "peerDependencies": {
+    "vite": "^2.0.0"
+  },
+  "keywords": [
+    "auto-include",
+    "vite-plugin",
+    "vite",
+    "babel-plugin-import",
+    "vite-plugin-import"
+  ],
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
+  },
+  "repository": {
+    "url": "https://github.com/cx690/vite-plugin-import2"
+  }
+}
