@@ -61,10 +61,7 @@ export default function vitePluginImport(
         config: autoIncludeOpt.length ? autoInclude(autoIncludeOpt).config : undefined,
         transform(code, id) {
             if (!/\.(?:[jt]sx?|vue|mjs)$/.test(id)) return;
-            return {
-                code: transformSrcCode(code, transformOptions(plgOptions)),
-                map: null,
-            };
+            return transformSrcCode(code, transformOptions(plgOptions), id);
         },
 
     };
@@ -117,10 +114,7 @@ function transformOptions(options: PluginOption[]): PluginInnerOptions {
     });
 }
 
-function transformSrcCode(
-    code: string,
-    plgOptions: PluginInnerOptions,
-): string {
+function transformSrcCode(code: string, plgOptions: PluginInnerOptions, id: string): { code: string, map: any } {
     const ast = parser.parse(code, {
         sourceType: 'module',
         plugins: ['jsx'],
@@ -164,5 +158,13 @@ function transformSrcCode(
             }
         },
     });
-    return generate(ast).code;
+    const result = generate(ast, {
+        filename: id,
+        sourceMaps: true,
+        sourceFileName: id
+    });
+    return {
+        code: result.code,
+        map: result.map,
+    };
 }
