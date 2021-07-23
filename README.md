@@ -36,7 +36,9 @@ import { Button } from 'antd';
 
 import Button from 'antd/es/button';
 import 'antd/es/button/style';
-//auto add Pre-bundling dependencies:
+
+
+//vite config change (auto add Pre-bundling dependencies):
         ↓ ↓ ↓ ↓ ↓ ↓
   optimizeDeps:{
     include: ['antd/es/button','antd/es/button/style','antd/es/input','antd/es/input/style',...]
