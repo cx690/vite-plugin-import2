@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-import2",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A tool look like babel-plugin-import and can auto inject to vite's Pre-bundling dependencies.",
   "main": "cjs/index.js",
   "module": "esm/index.js",
@@ -38,7 +38,8 @@
     "vite-plugin",
     "vite",
     "babel-plugin-import",
-    "vite-plugin-import"
+    "vite-plugin-import",
+    "rollup-plugin"
   ],
   "publishConfig": {
     "registry": "http://registry.npmjs.org"

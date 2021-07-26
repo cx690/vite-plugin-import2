@@ -3,6 +3,7 @@
 A tool look like babel-plugin-import and can auto inject to vite's Pre-bundling dependencies.
 Can effectively prevent vite's reload page when it find new dependencies,because these had already pushed to Pre-bundling dependencies.
 Fork from [vite-plugin-babel-import](https://www.npmjs.com/package/vite-plugin-babel-import "vite-plugin-babel-import") and add new features.
+This is also a rollup plugin.
 
 ## install
 
@@ -91,4 +92,22 @@ export default {
   ],
   // ...
 };
+```
+## In Rollup
+It also works well in rollup.
+
+```js
+//rollup.config.js
+export default{
+  ...,
+  plugins:[
+    ...,
+    vitePluginImport({
+          libraryName: 'antd',
+          style: true,
+          autoInclude: false,//you'd better set autoInclude=false
+      }),
+  ]
+}
+
 ```
