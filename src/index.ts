@@ -117,7 +117,7 @@ function transformOptions(options: PluginOption[]): PluginInnerOptions {
 function transformSrcCode(code: string, plgOptions: PluginInnerOptions, id: string): { code: string, map: any } {
     const ast = parser.parse(code, {
         sourceType: 'module',
-        plugins: ['jsx'],
+        plugins: ['jsx', 'typescript'],
     });
     traverse(ast, {
         enter(path) {
