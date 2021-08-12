@@ -60,7 +60,7 @@ export default function vitePluginImport(
         name: "vite-plugin-import2",
         config: autoIncludeOpt.length ? autoInclude(autoIncludeOpt).config : undefined,
         transform(code, id) {
-            if (!/\.(?:[jt]sx?|vue|mjs)$/.test(id)) return;
+            if (!/\.(?:[jt]sx?|vue|mjs)$/.test(id) || /node_modules/.test(id)) return;
             return transformSrcCode(code, transformOptions(plgOptions), id);
         },
 
