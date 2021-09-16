@@ -119,6 +119,7 @@ function transformSrcCode(code: string, plgOptions: PluginInnerOptions, id: stri
         sourceType: 'module',
         plugins: ['jsx', 'typescript'],
     });
+    let noImport = true;
     traverse(ast, {
         enter(path) {
             const { node } = path;
@@ -126,6 +127,7 @@ function transformSrcCode(code: string, plgOptions: PluginInnerOptions, id: stri
                 const { value } = node.source;
                 const plgOpt = plgOptions.find((opt) => opt.libraryName === value);
                 if (plgOpt) {
+                    noImport = false;
                     let importStyles: string[] = [];
                     let declarations: types.ImportDeclaration[] = [];
                     node.specifiers.forEach((spec) => {
@@ -158,6 +160,7 @@ function transformSrcCode(code: string, plgOptions: PluginInnerOptions, id: stri
             }
         },
     });
+    if (noImport) return;
     const result = generate(ast, {
         filename: id,
         sourceMaps: true,
