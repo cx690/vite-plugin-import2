@@ -118,6 +118,8 @@ function transformSrcCode(code: string, plgOptions: PluginInnerOptions, id: stri
     const ast = parser.parse(code, {
         sourceType: 'module',
         plugins: ['jsx', 'typescript'],
+        allowImportExportEverywhere: true,
+        allowAwaitOutsideFunction: true,
     });
     let noImport = true;
     traverse(ast, {
