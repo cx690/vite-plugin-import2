@@ -2,8 +2,8 @@
   "name": "vite-plugin-import2",
   "version": "1.0.5",
   "description": "A tool look like babel-plugin-import and can auto inject to vite's Pre-bundling dependencies.",
-  "main": "cjs/index.js",
-  "module": "esm/index.js",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
   "author": "caixue <caixue233@gmail.com>",
   "types": "esm/index.d.ts",
   "license": "MIT",
@@ -12,12 +12,17 @@
     "esm"
   ],
   "scripts": {
-    "build": "tsc && tsc --outDir ./cjs --module commonjs"
+    "build": "rollup -c"
   },
   "devDependencies": {
-    "@types/node": "^15.6.1",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
     "@types/babel__generator": "^7.6.2",
     "@types/babel__traverse": "^7.11.0",
+    "@types/node": "^15.6.1",
+    "rollup": "^2.60.0",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-typescript2": "^0.31.0",
     "typescript": "^4.3.2",
     "vite": "^2.3.6"
   },
@@ -27,8 +32,7 @@
     "@babel/parser": "^7.12.11",
     "@babel/traverse": "^7.12.12",
     "@babel/types": "^7.12.12",
-    "change-case": "^4.1.2",
-    "vite-plugin-auto-include": "^1.0.1"
+    "change-case": "^4.1.2"
   },
   "peerDependencies": {
     "vite": "^2.0.0"

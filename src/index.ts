@@ -4,8 +4,8 @@ import traverse from '@babel/traverse';
 import generate from '@babel/generator';
 import { addSideEffect } from '@babel/helper-module-imports';
 import * as changeCase from 'change-case';
-import { Plugin } from 'vite';
-import autoInclude from 'vite-plugin-auto-include';
+import type { Plugin } from 'vite';
+import autoInclude from './include';
 
 type ChangeCaseType = 'camelCase' | 'capitalCase' | 'constantCase' | 'dotCase' | 'headerCase' | 'noCase' | 'paramCase' | 'pascalCase' | 'pathCase' | 'sentenceCase' | 'snakeCase';
 
