@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { UserConfig } from 'vite';
+import resolve from 'resolve';
+
 interface AutoIncludeOpt {
     libraryName: string;
     /** default es */
@@ -34,18 +36,23 @@ function autoInclude(option: AutoIncludeOpt | AutoIncludeOpt[]) {
                     break;
                 }
 
-                const cwd = process.cwd();
-                const dirRtn = `${libraryName}${libraryDirectory ? '/' + libraryDirectory : ''}`
-                const dirCom = `node_modules/${dirRtn}`;
-                const conponets = fs.readdirSync(path.resolve(cwd, dirCom)).filter((name) => {
-                    const stat = fs.statSync(path.resolve(cwd, dirCom + '/' + name));
+                const dirRtn = `${libraryName}${libraryDirectory ? '/' + libraryDirectory : ''}`;
+                const arr = resolve.sync(libraryName).split('node_modules');
+                arr.pop();
+                const libraryDir = arr.pop().toString();
+                const dirCom = path.join(libraryDir, 'node_modules', libraryName, libraryDirectory ?? '');
+
+                const conponets = fs.readdirSync(dirCom).filter((name) => {
+                    const namePath = path.join(dirCom, name);
+                    const stat = fs.statSync(namePath);
                     if (ignoreDirs && ignoreDirs.includes(name)) return false;
                     return stat.isDirectory();
                 });
 
                 for (const name of conponets) {
                     //js add
-                    const files = fs.readdirSync(path.resolve(cwd, `${dirCom}/${name}`));
+                    const namePath = path.join(dirCom, name);
+                    const files = fs.readdirSync(namePath);
                     files.includes('index.js') && includeJs.push(`${dirRtn}/${name}`);
 
                     //css add
@@ -53,7 +60,6 @@ function autoInclude(option: AutoIncludeOpt | AutoIncludeOpt[]) {
                         const css = style(name, `${dirRtn}/${name}`);
                         css && includeCSS.push(css);
                     } else {
-                        const files = fs.readdirSync(path.resolve(cwd, `${dirCom}/${name}`));
                         if (files.includes(styleLibraryDirectory)) {
                             if (style === true) {
                                 includeCSS.push(`${dirRtn}/${name}/${styleLibraryDirectory}`);

@@ -35,7 +35,8 @@ function config(type) {
             '@babel/traverse',
             '@babel/generator',
             '@babel/helper-module-imports',
-            'change-case'
+            'change-case',
+            'resolve'
         ],
     }
 }
