@@ -197,6 +197,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/resolve@^1.20.1":
+  version "1.20.1"
+  resolved "https://registry.npmmirror.com/@types/resolve/download/@types/resolve-1.20.1.tgz#3727e48042fda81e374f5d5cf2fa92288bf698f8"
+  integrity sha1-NyfkgEL9qB43T11c8vqSKIv2mPg=
+
 "@types/semver@^7.3.9":
   version "7.3.9"
   resolved "https://registry.npmmirror.com/@types/semver/download/@types/semver-7.3.9.tgz?cache=0&sync_timestamp=1637270038709&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Fsemver%2Fdownload%2F%40types%2Fsemver-7.3.9.tgz#152c6c20a7688c30b967ec1841d31ace569863fc"
