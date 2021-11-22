@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-import2",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A tool look like babel-plugin-import and can auto inject to vite's Pre-bundling dependencies.",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
