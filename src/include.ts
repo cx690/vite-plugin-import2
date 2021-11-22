@@ -39,8 +39,7 @@ function autoInclude(option: AutoIncludeOpt | AutoIncludeOpt[]) {
                 const dirRtn = `${libraryName}${libraryDirectory ? '/' + libraryDirectory : ''}`;
                 const arr = resolve.sync(libraryName).split('node_modules');
                 arr.pop();
-                const libraryDir = arr.pop().toString();
-                const dirCom = path.join(libraryDir, 'node_modules', libraryName, libraryDirectory ?? '');
+                const dirCom = path.join(...arr, 'node_modules', libraryName, libraryDirectory ?? '');
 
                 const conponets = fs.readdirSync(dirCom).filter((name) => {
                     const namePath = path.join(dirCom, name);
