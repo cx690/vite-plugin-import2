@@ -46,11 +46,8 @@ function autoInclude(option: AutoIncludeOpt | AutoIncludeOpt[]) {
                     const stat = fs.statSync(namePath);
                     if (ignoreDirs && ignoreDirs.includes(name)) return false;
                     if (name.endsWith('.js') || name.endsWith('.cjs') || name.endsWith('.mjs')) {
-                        includeJs.push(`${dirRtn}/${name}`);
-                        return false;
-                    }
-                    if (name.endsWith('.css')) {
-                        includeCSS.push(`${dirRtn}/${name}`);
+                        const ext = path.extname(name);
+                        includeJs.push(`${dirRtn}/${path.basename(name, ext)}`);
                         return false;
                     }
                     return stat.isDirectory();
