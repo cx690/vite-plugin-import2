@@ -68,7 +68,7 @@ function autoInclude(option: AutoIncludeOpt | AutoIncludeOpt[]) {
                             if (style === true) {
                                 includeCSS.push(`${dirRtn}/${name}/${styleLibraryDirectory}`);
                             } else if (typeof style === 'string' && style !== '') {
-                                includeCSS.push(`${dirRtn}/${name}/${styleLibraryDirectory}/${style}`);
+                                includeCSS.push(path.join(`${dirRtn}/${name}/${styleLibraryDirectory}`, `${style}`).split(path.sep).join('/'));
                             }
                         }
                     }
