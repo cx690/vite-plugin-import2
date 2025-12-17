@@ -6,6 +6,7 @@ import { addSideEffect } from '@babel/helper-module-imports';
 import * as changeCase from 'change-case';
 import type { Plugin } from 'vite';
 import autoInclude from './include';
+import path from 'path';
 
 type ChangeCaseType = 'camelCase' | 'capitalCase' | 'constantCase' | 'dotCase' | 'headerCase' | 'noCase' | 'paramCase' | 'pascalCase' | 'pathCase' | 'sentenceCase' | 'snakeCase';
 
@@ -89,8 +90,8 @@ function transformOptions(options: PluginOption[]): PluginInnerOptions {
                 ](name);
             };
         }
-        const libraryDirectory = opt.libraryDirectory || 'es';
-        const styleLibraryDirectory = opt.styleLibraryDirectory || 'style';
+        const libraryDirectory = opt.libraryDirectory ?? 'es';
+        const styleLibraryDirectory = opt.styleLibraryDirectory ?? 'style';
 
         return {
             libraryName: opt.libraryName,
@@ -105,10 +106,10 @@ function transformOptions(options: PluginOption[]): PluginInnerOptions {
                 return (opt.style as ((name: string) => string | null | undefined))(styleCaseFn(name));
             } : opt.style === true ? (name) => {
                 if (opt.ignoreStyles?.includes(name)) return null;
-                return `${opt.libraryName}/${libraryDirectory}/${styleCaseFn(name)}/${styleLibraryDirectory}`;
+                return path.join(opt.libraryName, libraryDirectory, styleCaseFn(name), styleLibraryDirectory).replace(/\\/g, '/');
             } : (typeof opt.style === 'string' && opt.style !== '') ? (name) => {
                 if (opt.ignoreStyles?.includes(name)) return null;
-                return `${opt.libraryName}/${libraryDirectory}/${styleCaseFn(name)}/${styleLibraryDirectory}/${opt.style}`;
+                return path.join(opt.libraryName, libraryDirectory, styleCaseFn(name), styleLibraryDirectory, opt.style as string).replace(/\\/g, '/');
             } : null,
         } as PluginInnerOption;
     });
